@@ -21,31 +21,38 @@ def CTCS(phiOld, c, nt):
     
     
     #FTCS for the first time-step, looping over space
-    for j in range (1,nx-1):
-        phi[j]=phiOld[j] - 0.5*c*(phiOld[j+1] - phiOld[j-1])
-    #apply periodic boundary conditions
-    phi[0] = phiOld[0] -0.5*c*(phiOld[1] - phiOld[nx-1])
-    phi[nx-1] = phi[0]
-    
+    for j in range(nx):
+        phi[j]=phiOld[j] - 0.5*c*(phiOld[(j+1)%nx] - phiOld[(j-1)%nx])
  
     # CTCS for all time steps
     for n in range (1,nt):
         # Code for CTCS at each time-step 
         # Loop over space
-        for j in range (1, nx-1):
-            phiNew[j] = phiOld[j] - c*(phi[j+1] - phi[j-1])
-        # Apply periodic boundary conditions
-        phiNew[0] = phiOld[0] - c*(phi[1] - phi[nx-1])
-        phiNew[nx-1] = phiNew[0]
+        for j in range(nx):
+            phiNew[j] = phiOld[j] - c*(phi[(j+1)%nx] - phi[(j-1)%nx])
         # Update phi for the next time-step
         phiOld = phi.copy()
         phi = phiNew.copy()
         
     return phi
 
-def CNCS():
+def BTCS(phi, c, nt):
+
+    # Array for the RHS of the matrix equation
+    RHS = phi.copy()
+
+    nx = len(phi)
     
-            
-        
+    M = np.zeros([nx,nx])
+    for j in range(nx):
+        M[j,j] = 1
+        M[(j-1)%nx][j] = 0.5*c
+        M[(j+1)%nx][j] = -0.5*c
+
+    # Solution for nt time steps
+    for it in range(nt):
+        RHS = phi.copy()
+        phi = np.linalg.solve(M, RHS)
     
-    
+    return phi
+

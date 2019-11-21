@@ -11,10 +11,9 @@ import numpy as np
 
 # read in all the linear advection schemes, initial conditions and other
 # code associated with this application
-from Advection_schemes import CTCS
-#from Advection_schemes import CNCS
-#from Diagnostics import
-from Initial_conditions import initialBell
+from Advection_schemes import *
+#from Diagnostics import *
+from Initial_conditions import *
 
 
 
@@ -38,7 +37,7 @@ def main():
     print ("end time =" ,t)
     
     # Spatial variable going from zero to one inclusive
-    x = np.linspace (0.0, 1.0, nx+1)
+    x = np.arange(0,1,dx)
     print ('x=', x)
     
     # Three time levels of the dependant variable, phi
@@ -46,6 +45,7 @@ def main():
     
     #Advection using CTCS, CNCS and Semi-Langrangian
     phiCTCS = CTCS(phiOld.copy(), c, nt)
+    phiBTCS = BTCS(phiOld.copy(), c, nt)
     #phiCNCS = CNCS()
     #phiSL = Semi_Langrangian
     
@@ -56,16 +56,15 @@ def main():
     
     font = {'size' :20}
     plt.rc('font', **font)
-    plt.figure(1)
-    plt.clf()
-    plt.ion()
     plt.plot(x, initialBell(x - u*t), label='Analytic' , color='black', linestyle= '--', linewidth=2)
     plt.plot (x, phiCTCS, label='CTCS', color='blue')
-    #plt.plot(x, phiBTCS, label='BTCS', color='red')
+    plt.plot(x, phiBTCS, label='BTCS', color='red')
     plt.axhline(0, linestyle=':', color='black')
-    plt.ylim(0,1.2)
+    plt.ylim(-0.1,1.1)
+    plt.xlim(0,1)
     plt.legend(bbox_to_anchor=(1.1, 1))
     plt.xlabel ('$x$')
+    plt.show()
     
 main()    
     
