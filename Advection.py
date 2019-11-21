@@ -12,7 +12,7 @@ import numpy as np
 # read in all the linear advection schemes, initial conditions and other
 # code associated with this application
 from Advection_schemes import CTCS
-#from Advection_schemes import
+#from Advection_schemes import CNCS
 #from Diagnostics import
 from Initial_conditions import initialBell
 
@@ -23,8 +23,6 @@ def main():
     "spatial steps with advection coefficient c, time step dt for nt time steps"
     
     # Parameters
-    #xmin = 
-    #xmax
     nx = 100
     c = 0.9
     u = 1.0
@@ -44,13 +42,7 @@ def main():
     print ('x=', x)
     
     # Three time levels of the dependant variable, phi
-    #phi = initialBell(x)
-    #phiNew = phi.copy()
-    #phiOld = phi.copy()
     phiOld = initialBell(x)
-    
-    # Analytic solution 
-    #phiAnalytic=
     
     #Advection using CTCS, CNCS and Semi-Langrangian
     phiCTCS = CTCS(phiOld.copy(), c, nt)
@@ -61,20 +53,13 @@ def main():
     #
     #
     
-    # Plot the solution in comparison to the analytic solution
-    #plt.plot(x, initialBell(x - u*t), 'k', label='analytic')
-    #plt.plot(x, phi, 'b', label='CTCS')
-    #plt.legend(loc='best')
-    #plt.ylabel('$\phi$')
-    #plt.axhline(0, linestyle=':', color='black')
-    #plt.show()
     
     font = {'size' :20}
     plt.rc('font', **font)
     plt.figure(1)
     plt.clf()
     plt.ion()
-    plt.plot(x, initialBell(x - u*t), label='Initial' , color='black', linestyle= '--', linewidth=2)
+    plt.plot(x, initialBell(x - u*t), label='Analytic' , color='black', linestyle= '--', linewidth=2)
     plt.plot (x, phiCTCS, label='CTCS', color='blue')
     #plt.plot(x, phiBTCS, label='BTCS', color='red')
     plt.axhline(0, linestyle=':', color='black')

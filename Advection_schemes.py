@@ -42,6 +42,9 @@ def CTCS(phiOld, c, nt):
         phi = phiNew.copy()
         
     return phi
+
+def CNCS():
+    
             
         
     
