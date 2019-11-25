@@ -52,7 +52,18 @@ def BTCS(phi, c, nt):
     # Solution for nt time steps
     for it in range(nt):
         RHS = phi.copy()
-        phi = np.linalg.solve(M, RHS)
+        phi = np.linalg.solve(M, RHS) 
     
     return phi
+
+def CNCS (phi, c, nt):
+    
+    #Array for the RHS of the matrix equation
+    
+    
+    
+    for j in range (nx):
+        M[j,j] = 1
+        M[(j-1)%nx][j] = 0.25*c
+        M[(j+1)%nx][j] = -0.25*c
 
