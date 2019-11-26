@@ -46,7 +46,7 @@ def main():
     #Advection using CTCS, CNCS and Semi-Langrangian
     phiCTCS = CTCS(phiOld.copy(), c, nt)
     phiBTCS = BTCS(phiOld.copy(), c, nt)
-    #phiCNCS = CNCS()
+    phiCNCS = CNCS(phiOld.copy(), c, nt)
     #phiSL = Semi_Langrangian
     
     #Calculate and print out error norms
@@ -59,6 +59,7 @@ def main():
     plt.plot(x, initialBell(x - u*t), label='Analytic' , color='black', linestyle= '--', linewidth=2)
     plt.plot (x, phiCTCS, label='CTCS', color='blue')
     plt.plot(x, phiBTCS, label='BTCS', color='red')
+    plt.plot (x, phiCNCS, label='CNCS', color= 'green')
     plt.axhline(0, linestyle=':', color='black')
     plt.ylim(-0.1,1.1)
     plt.xlim(0,1)

@@ -36,12 +36,12 @@ def CTCS(phiOld, c, nt):
         
     return phi
 
-def BTCS(phi, c, nt):
+def BTCS(phiOld, c, nt):
 
     # Array for the RHS of the matrix equation
-    RHS = phi.copy()
+    RHS = phiOld.copy()
 
-    nx = len(phi)
+    nx = len(phiOld)
     
     M = np.zeros([nx,nx])
     for j in range(nx):
@@ -51,19 +51,31 @@ def BTCS(phi, c, nt):
 
     # Solution for nt time steps
     for it in range(nt):
-        RHS = phi.copy()
+        RHS = phiOld.copy()
         phi = np.linalg.solve(M, RHS) 
     
     return phi
 
-def CNCS (phi, c, nt):
+def CNCS (phiOld, c, nt):
     
     #Array for the RHS of the matrix equation
+    RHS = phiOld.copy()
     
+    nx = len(phiOld)
     
-    
+    M = np.zeros([nx,nx])
     for j in range (nx):
         M[j,j] = 1
         M[(j-1)%nx][j] = 0.25*c
         M[(j+1)%nx][j] = -0.25*c
-
+        
+    #Solution for nt time steps
+    for it in range(nt):
+        RHS = phiOld.copy()
+        
+        for j in range (nx):
+            RHS[j] = 0.25*c*(RHS[(j+1)%nx] - RHS[(j-1)%nx])
+        
+        phi = np.linalg.solve(M, RHS)
+        
+    return phi
