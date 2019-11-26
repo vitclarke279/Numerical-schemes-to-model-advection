@@ -74,7 +74,7 @@ def CNCS (phiOld, c, nt):
         RHS = phiOld.copy()
         
         for j in range (nx):
-            RHS[j] = 0.25*c(RHS[(j+1)%nx] - RHS[(j-1)%nx])
+            RHS[j] = 0.25*c*(RHS[(j+1)%nx] - RHS[(j-1)%nx])
         
         phi = np.linalg.solve(M, RHS)
         
