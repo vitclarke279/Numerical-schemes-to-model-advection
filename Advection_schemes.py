@@ -72,3 +72,33 @@ def CNCS (phi, c, nt):
         phi = np.linalg.solve(M, RHS)
         
     return phi
+
+
+
+def Semi_Lagrangian (phi, c, nt, dt):
+    
+    nx = len(phi)
+    
+    # New timestep array for phi
+    phi = phi.copy()
+    phiNew = phi.copy()
+    
+    for n in range (1,nt):
+        
+        for j in range(nx):
+            
+            phiNew[j] = phi([j]-u*dt)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
