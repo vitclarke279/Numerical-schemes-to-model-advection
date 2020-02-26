@@ -143,7 +143,7 @@ def main(nx, c, t):
     plt.plot(x, phiExact, label='Analytic' , color='gray', linestyle= '--', linewidth=2)
     #Plotting scheme
     plt.plot(x, phiSL, label='Semi Lagrangian', color='orange')
-    #plt.axhline(0, linestyle=':', color='black')
+    plt.axhline(0, linestyle=':', color='black')
     plt.ylim(-0.1,1.1)
     plt.xlim(0,1)
     #plt.legend(bbox_to_anchor=(1.1, 1))
@@ -155,42 +155,42 @@ def main(nx, c, t):
     
 #Plotting conservation of phi for all advection schemes used
     plt.figure()
-    plt.plot(time, CNCSmass, label='CNCS mass of $\phi$', color='blue')
-    plt.plot(time, CTCSmass, label='CTCS mass of $\phi$', color='green')
+    plt.plot(time, CNCSmass, label='CNCS mass of $\phi$', color='green')
+    plt.plot(time, CTCSmass, label='CTCS mass of $\phi$', color='blue')
     plt.plot(time, SLmass, label='SL mass of $\phi$', color='orange')
     #plt.legend(bbox_to_anchor=(1.1,1))
     plt.grid(b=None, which='major', axis='both')
     #plt.axhline(0, linestyle=':', color='black')
     plt.title(f'c={c},nx={nx}', fontsize=15)
-    plt.ylim(-1.1,1.1)
-    plt.xlabel('$x$')
-    plt.ylabel('$\phi mass$')
+    plt.ylim(0.249,0.251)
+    plt.xlabel('$s$')
+    plt.ylabel('mass of $\phi$')
     plt.show
     
     
 #Plotting conservation of phi for CTCS 
     plt.figure()
-    plt.plot(time, CTCSmass, label='CTCS mass of $\phi$', color='green')
+    plt.plot(time, CTCSmass, label='CTCS mass of $\phi$', color='blue')
     #plt.legend(bbox_to_anchor=(1.1,1))
     plt.axhline(0, linestyle=':', color='black')
     plt.grid(b=None, which='major', axis='both')
     plt.title(f'c={c},nx={nx}', fontsize=15)
-    plt.ylim(-0.1,1.1)
-    plt.xlabel('$x$')
-    plt.ylabel('$\phi mass$')
+    plt.ylim(0.249,0.251)
+    plt.xlabel('$s$')
+    plt.ylabel('mass of $\phi$')
     plt.show
     
     
 #Plotting conservation of phi for CNCS
     plt.figure()
-    plt.plot(time, CNCSmass, label='CNCS mass of $\phi$', color='blue')
+    plt.plot(time, CNCSmass, label='CNCS mass of $\phi$', color='green')
     #plt.legend(bbox_to_anchor=(1.1,1))
     plt.axhline(0, linestyle=':', color='black')
     plt.grid(b=None, which='major', axis='both')
     plt.title(f'c={c},nx={nx}', fontsize=15)
-    plt.ylim(-0.1,1.1)
-    plt.xlabel('$x$')
-    plt.ylabel('$\phi mass$')
+    plt.ylim(0.249,0.251)
+    plt.xlabel('$s$')
+    plt.ylabel('mass of $\phi$')
     plt.show
     
     
@@ -201,9 +201,9 @@ def main(nx, c, t):
     plt.axhline(0, linestyle=':', color='black')
     plt.grid(b=None, which='major', axis='both')
     plt.title(f'c={c},nx={nx}', fontsize=15)
-    plt.ylim(-0.1,1.1)
-    plt.xlabel('$x$')
-    plt.ylabel('$\phi mass$')
+    plt.ylim(0.249,0.251)
+    plt.xlabel('$s$')
+    plt.ylabel('mass of $\phi$')
     plt.show
     
 

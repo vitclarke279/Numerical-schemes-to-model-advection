@@ -17,8 +17,8 @@ from Advection import*
 from L2_Error_Norm import*
 
 
-nx = np.array([100,100,100,100])
-c = np.array([0.2,0.5,1.0,1.2])
+nx = np.array([100,100,100,100,100])
+c = np.array([0.2,0.4,0.5,0.6,0.8])
 u = 1.0
 t = 3
 
@@ -45,3 +45,22 @@ c4 = c[3]
 
 main(nx4, c4, t)
 
+nx5 = nx[4]
+c5 = c[4]
+
+main(nx5, c5, t)
+
+nx6 = nx[5]
+c6 = c[5]
+
+#main(nx6, c6, t)
+
+#nx7 = nx[6]
+#c7 = c[6]
+
+#main(nx7, c7, t)
+
+#nx8 = nx[7]
+#c8 = c[7]
+
+#main(nx8, c8, t)
