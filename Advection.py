@@ -3,6 +3,8 @@
 Created on Wed Nov 20 16:30:51 2019
 
 @author: vlopa
+
+Script running advection models.
 """
 
 import matplotlib.pyplot as plt
@@ -54,7 +56,7 @@ def main(nx, c, t):
     phiExact = initialBell(x - u*t)
     
     
-#Calculate and print out error norms
+    #Calculate and print out error norms
     CTCS_L2_error = L2ErrorNorm(phiCTCS, phiExact)
     print ('L2 Error Norm for CTCS:',CTCS_L2_error)
     CNCS_L2_error = L2ErrorNorm(phiCNCS, phiExact)
@@ -62,7 +64,7 @@ def main(nx, c, t):
     SL_L2_error = L2ErrorNorm(phiSL, phiExact)
     print ('L2 Error Norm for Semi-Lagrangian:' , SL_L2_error)
     
-#Boundedness of the schemes
+    #Boundedness of the schemes
     print('Exact solution phi max=',max(phiExact))
     print('Exact solution phi min=',min(phiExact))
     print('CTCS phi max=',max(phiCTCS))
@@ -72,28 +74,28 @@ def main(nx, c, t):
     print('SL phi max=',max(phiSL))
     print('SL phi min=', min(phiSL))    
    
-#Plotting all advection scheme
+    #Plotting all advection scheme
     plt.figure()
+    plt.figure(figsize=(10,5))
     font = {'size' :20}
     plt.rc('font', **font)
     #Plotting starting phi
-    plt.plot(x, phiOld, label= 'Initial', color= 'black', linestyle= ':')
+    #plt.plot(x, phiOld, label= 'Initial', color= 'black', linestyle= ':')
     #Plotting exact solution
-    plt.plot(x, phiExact, label='Analytic' , color='gray', linestyle= '--', linewidth=2)
+    plt.plot(x, phiExact, label='Analytic' , color='black', linewidth=2)
     #plotting advection schemes
-    plt.plot (x, phiCTCS, label='CTCS', color='blue')
+    plt.plot (x, phiCTCS, label='CTCS', color='orange')
     plt.plot (x, phiCNCS, label='CNCS', color= 'green')
-    plt.plot(x, phiSL, label='Semi Lagrangian', color='orange')
-    #plt.legend(bbox_to_anchor=(1.1,1))
-    #plt.axhline(0, linestyle=':', color='black')
+    plt.plot(x, phiSL, label='Semi Lagrangian', color='blue')
     plt.ylim(-0.1,1.1)
     plt.xlim(0,1)
-    plt.title(f'c={c},nx={nx}', fontsize=15)
-    plt.xlabel ('$x$')
-    plt.ylabel('$\phi$')
+    plt.legend(loc='best', fontsize=20)
+    plt.title(f'c={c},nx={nx}', fontsize=22)
+    plt.xlabel ('$x$', fontsize=20)
+    plt.ylabel('$\phi$', fontsize=20)
     plt.show
     
-#plotting CTCS scheme
+    #plotting CTCS scheme
     plt.figure()
     font = {'size' :20}
     plt.rc('font', **font)
@@ -106,14 +108,13 @@ def main(nx, c, t):
     plt.axhline(0, linestyle=':', color='black')
     plt.ylim(-0.1,1.1)
     plt.xlim(0,1)
-    #plt.legend(bbox_to_anchor=(1.1, 1))
     plt.title(f'c={c},nx={nx}', fontsize=15)
     plt.xlabel ('$x$')
     plt.ylabel('$\phi$')
     plt.show
     
     
-#Plotting Crank-Nicolson scheme
+    #Plotting Crank-Nicolson scheme
     plt.figure()
     font = {'size' :20}
     plt.rc('font', **font)
@@ -123,7 +124,6 @@ def main(nx, c, t):
     plt.plot(x, phiExact, label='Analytic' , color='gray', linestyle= '--', linewidth=2)
     #Plotting scheme
     plt.plot (x, phiCNCS, label='CNCS', color= 'green')
-    #plt.legend(bbox_to_anchor=(1.1,1))
     plt.axhline(0, linestyle=':', color='black')
     plt.ylim(-0.1,1.1)
     plt.xlim(0,1)
@@ -133,7 +133,7 @@ def main(nx, c, t):
     plt.show
     
     
-#Plotting Semi-LAgrangian scheme with cubic interpolation
+    #Plotting Semi-LAgrangian scheme with cubic interpolation
     plt.figure()
     font = {'size' :20}
     plt.rc('font', **font)
@@ -146,32 +146,30 @@ def main(nx, c, t):
     plt.axhline(0, linestyle=':', color='black')
     plt.ylim(-0.1,1.1)
     plt.xlim(0,1)
-    #plt.legend(bbox_to_anchor=(1.1, 1))
     plt.title(f'c={c},nx={nx}', fontsize=15)
     plt.xlabel ('$x$')
     plt.ylabel('$\phi$')
     plt.show
     
     
-#Plotting conservation of phi for all advection schemes used
+    #Plotting conservation of phi for all advection schemes used
     plt.figure()
     plt.plot(time, CNCSmass, label='CNCS mass of $\phi$', color='green')
     plt.plot(time, CTCSmass, label='CTCS mass of $\phi$', color='blue')
     plt.plot(time, SLmass, label='SL mass of $\phi$', color='orange')
-    #plt.legend(bbox_to_anchor=(1.1,1))
     plt.grid(b=None, which='major', axis='both')
-    #plt.axhline(0, linestyle=':', color='black')
-    plt.title(f'c={c},nx={nx}', fontsize=15)
+    plt.legend(loc='best', fontsize=12)
+    #plt.title(f'c={c},nx={nx}', fontsize=15)
+    plt.title("Conservation of the schemes")
     plt.ylim(0.249,0.251)
     plt.xlabel('$s$')
     plt.ylabel('mass of $\phi$')
     plt.show
     
     
-#Plotting conservation of phi for CTCS 
+    #Plotting conservation of phi for CTCS 
     plt.figure()
     plt.plot(time, CTCSmass, label='CTCS mass of $\phi$', color='blue')
-    #plt.legend(bbox_to_anchor=(1.1,1))
     plt.axhline(0, linestyle=':', color='black')
     plt.grid(b=None, which='major', axis='both')
     plt.title(f'c={c},nx={nx}', fontsize=15)
@@ -181,10 +179,9 @@ def main(nx, c, t):
     plt.show
     
     
-#Plotting conservation of phi for CNCS
+    #Plotting conservation of phi for CNCS
     plt.figure()
     plt.plot(time, CNCSmass, label='CNCS mass of $\phi$', color='green')
-    #plt.legend(bbox_to_anchor=(1.1,1))
     plt.axhline(0, linestyle=':', color='black')
     plt.grid(b=None, which='major', axis='both')
     plt.title(f'c={c},nx={nx}', fontsize=15)
@@ -194,10 +191,9 @@ def main(nx, c, t):
     plt.show
     
     
-#Plotting conservation of phi for Semi Lagrangian
+    #Plotting conservation of phi for Semi Lagrangian
     plt.figure()
     plt.plot(time, SLmass, label='SL mass of $\phi$', color='orange')
-    #plt.legend(bbox_to_anchor=(1.1,1))
     plt.axhline(0, linestyle=':', color='black')
     plt.grid(b=None, which='major', axis='both')
     plt.title(f'c={c},nx={nx}', fontsize=15)
@@ -207,7 +203,7 @@ def main(nx, c, t):
     plt.show
     
 
-#main(nx, c, nt)    
+  
     
 
     

@@ -3,6 +3,9 @@
 Created on Tue Feb 11 12:53:25 2020
 
 @author: vlopa
+
+Main script running all the advection models with different parameters and 
+producing graphs to to perform a comparison.
 """
 import matplotlib.pyplot as plt
 
@@ -17,12 +20,14 @@ from Advection import*
 from L2_Error_Norm import*
 
 
-nx = np.array([100,100,100,100,100])
-c = np.array([0.2,0.4,0.5,0.6,0.8])
+#nx = np.array([500,250,166,125,100,50,34,25])
+#c = np.array([0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5])
+nx = np.array([100])
+c = np.array([10.5])
 u = 1.0
 t = 3
 
-L2_E_N(nx, c, t)
+#L2_E_N(nx, c, t)
 
 
 nx1 = nx[0]
@@ -33,22 +38,22 @@ main(nx1, c1, t)
 nx2 = nx[1]
 c2 = c[1]
 
-main(nx2, c2, t)
+#main(nx2, c2, t)
 
 nx3 = nx[2]
 c3 = c[2]
 
-main(nx3, c3, t)
+#main(nx3, c3, t)
 
 nx4 = nx[3]
 c4 = c[3]
 
-main(nx4, c4, t)
+#main(nx4, c4, t)
 
 nx5 = nx[4]
 c5 = c[4]
 
-main(nx5, c5, t)
+#main(nx5, c5, t)
 
 nx6 = nx[5]
 c6 = c[5]

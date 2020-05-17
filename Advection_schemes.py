@@ -3,6 +3,8 @@
 Created on Wed Nov 20 16:26:30 2019
 
 @author: vlopa
+
+Script with advection model functions.
 """
 
 import numpy as np
@@ -41,29 +43,12 @@ def CTCS(phiOld, c, nt, dx):
         phi = phiNew.copy()
         totalMass[n+1] = mass(phi, dx)
     
-    #L2 error norm
-    #L2ErrorNorm(phi, phiExact)
-    
     return phi, totalMass
 
-def BTCS(phi, c, nt, dx):
-    nx = len(phi)
-    
-    M = np.zeros([nx,nx])
-    for j in range(nx):
-        M[j,j] = 1
-        M[(j-1)%nx,j] = 0.5*c
-        M[(j+1)%nx,j] = -0.5*c
-
-    # Solution for nt time steps
-    for it in range(nt):
-        phi = np.linalg.solve(M, phi) 
-    
-
-    
-    return phi
 
 def CNCS (phi, c, nt, dx):
+    "Advection of profile in phiOld using CTCS non-dimentional Courant"
+    "number, c"
     
     #Array for the RHS of the matrix equation
     RHS = phi.copy()
@@ -90,8 +75,9 @@ def CNCS (phi, c, nt, dx):
     return phi, totalMass
 
 
-
 def Semi_Lagrangian (phi, c, nt, dx):
+    "Advection of profile in phiOld using Semi-Lagrangia non-dimentional Courant"
+    "number, c"
     
     nx = len(phi)
     
@@ -114,6 +100,7 @@ def Semi_Lagrangian (phi, c, nt, dx):
         totalMass[n+1] = mass(phi, dx)
     
     return phi, totalMass
+
 
 def Semi_Lagrangian_mass (phi, c, nt, dx):
     
